@@ -28,24 +28,29 @@ class usuario
       return json_encode($vars);
     }
 
-    public static function user_exists($email,$clave){
+    public static function return_user($email){
 
       $data = usuario::readFromFile();
 
-      foreach($data['usuarios'] as $key=>$user){
-          if($user['email']==$email && $user['clave']==$clave){
-            return true;
+      foreach($data as $key=>$user){
+          if($user['email']==$email){
+             return $user;
           }
       }
 
-      return false;
-
+      return NULL;
     }
 
     public static function readFromFile(){
 
       $file = fopen('./archivos/datos.json', 'r');
-      $data = fread($file,filesize('./archivos/datos.json'));
+      $filesize = filesize('./archivos/datos.json');
+
+      if($filesize == 0){
+        $data = '[]';
+      }else{
+        $data = fread($file,$filesize);
+      }      
 
       fclose($file);
 
@@ -56,10 +61,11 @@ class usuario
         
       $data = usuario::readFromFile();
 
-      array_push($data['usuarios'],$user);
+      array_push($data,$user);
 
       $file = fopen('./archivos/datos.json', 'w');
       fwrite($file,json_encode($data));
+
       fclose($file);      
     }
 

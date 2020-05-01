@@ -2,13 +2,12 @@
 
  class helper{
 
-    static function formatResponse($obj, $error = ''){
+    static function formatResponse($message,$success){
 
         $response = new stdClass();
-        $isset = isset($obj);
         
-        $response->success = $isset;
-        $response->data = $isset ? $obj->user_encode() : '';
+        $response->success = $success;
+        $response->data = $message;
 
         return json_encode($response);
     }
