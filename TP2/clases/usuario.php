@@ -25,12 +25,10 @@ class usuario
 
       $data = usuario::readFromFile();
 
-      foreach($data as $key=>$user){
-          if($user['email']==$email){
-             return $user;
-          }
-      }
-
+      foreach($data as $key=>$user)
+          if($user['email']==$email)
+             return $user;         
+      
       return NULL;
     }
 
@@ -56,7 +54,6 @@ class usuario
 
       $file = fopen('./archivos/datos.json', 'w');
       fwrite($file,json_encode($data));
-
       fclose($file);      
     }
 
@@ -64,12 +61,10 @@ class usuario
 
         $props = ['email','nombre','apellido','clave','telefono','tipo'];
 
-        foreach($props as $key => $prop){
-            if(!isset($request[$prop])){
-              return false;
-            }
-        }
-
+        foreach($props as $key => $prop)
+            if(!isset($request[$prop]))
+                return false;          
+        
         return true;
     }
 }

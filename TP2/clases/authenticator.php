@@ -20,11 +20,8 @@ class authenticator{
         $decoded;
 
         try {
-
             $decoded = JWT::decode($token, authenticator::$key, array('HS256'));
-
-        } catch (Exception $e) {
-            
+        } catch (Exception $e) {            
             return NULL;
         }
         

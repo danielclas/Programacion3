@@ -41,17 +41,17 @@ if(isset($path_info) && isset($request_method)){
             break;
         }
     }else if($request_method == "GET"){
+        $headers = getallheaders();
         switch($path_info){
             case "/detalle":
-                $token = $_GET['token'] ?? NULL;
+                $token = $headers['token'] ?? NULL;
                 $message = authenticator::validateJWT($token);
 
                 if(isset($message)) $success = true;
-                else $message = "JWT Invalido";
-                
+                else $message = "JWT Invalido";                
             break;
             case "/lista":
-                $token = $_GET['token'] ?? NULL;
+                $token = $headers['token'] ?? NULL;
                 $usuario = authenticator::validateJWT($token);
 
                 if(isset($usuario)){
@@ -61,9 +61,9 @@ if(isset($path_info) && isset($request_method)){
                     if($usuario->tipo=='admin') $message = $usuarios;
                     else{
                         $message = [];
-                        foreach($usuarios as $key=>$value){
-                            if($value['tipo']=='user') array_push($message,$value);
-                        }
+                        foreach($usuarios as $key=>$value)
+                            if($value['tipo']=='user') 
+                                array_push($message,$value);                        
                     }
                 }
             break;
