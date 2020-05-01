@@ -20,14 +20,7 @@ class usuario
         $this->telefono = $user['telefono'];
         $this->tipo = $user['tipo'];
     }
-
-    public function user_encode(){
-
-      $vars = get_object_vars($this);
-
-      return json_encode($vars);
-    }
-
+    
     public static function return_user($email){
 
       $data = usuario::readFromFile();
@@ -43,16 +36,14 @@ class usuario
 
     public static function readFromFile(){
 
-      $file = fopen('./archivos/datos.json', 'r');
+      $data = '[]';      
       $filesize = filesize('./archivos/datos.json');
 
-      if($filesize == 0){
-        $data = '[]';
-      }else{
+      if($filesize != 0){
+        $file = fopen('./archivos/datos.json', 'r');
         $data = fread($file,$filesize);
-      }      
-
-      fclose($file);
+        fclose($file);
+      }          
 
       return json_decode($data,true);
     }

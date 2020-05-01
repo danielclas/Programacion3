@@ -18,13 +18,11 @@ if(isset($path_info) && isset($request_method)){
                 if($isValid && empty(usuario::return_user($_POST['email']))){
                     $usuario = new usuario($_POST);
                     usuario::writeToFile($usuario);
-                    $message="Usuario registrado exitosamente";
-                    $success=true;
+                    $message = "Usuario registrado exitosamente";
+                    $success = true;
                 }else{
                     $message = "Usuario invalido o ya existe";
                 }               
-
-                echo helper::formatResponse($message,$success);
             break;
             case "/login":
                 $emailLogin = $_POST['email'] ?? NULL;
@@ -38,6 +36,9 @@ if(isset($path_info) && isset($request_method)){
                     $message = "Credenciales invalidas";
                 }                
             break;
+            default:
+                $message = "Ruta invalida";
+            break;
         }
     }else if($request_method == "GET"){
         switch($path_info){
@@ -45,28 +46,36 @@ if(isset($path_info) && isset($request_method)){
                 $token = $_GET['token'] ?? NULL;
                 $message = authenticator::validateJWT($token);
 
-                if(isset($message)){
-                    $success = true;
-                }else{
-                    $message = "JWT Invalido";
-                }
-
+                if(isset($message)) $success = true;
+                else $message = "JWT Invalido";
+                
             break;
             case "/lista":
                 $token = $_GET['token'] ?? NULL;
                 $usuario = authenticator::validateJWT($token);
 
-                if(isset($usuario) && $usuario->tipo=='admin'){
-                    $success = true;
-                    $message = usuario::readFromFile();
+                if(isset($usuario)){
+                    $success=true;
+                    $usuarios = usuario::readFromFile();
+
+                    if($usuario->tipo=='admin') $message = $usuarios;
+                    else{
+                        $message = [];
+                        foreach($usuarios as $key=>$value){
+                            if($value['tipo']=='user') array_push($message,$value);
+                        }
+                    }
                 }
+            break;
+            default:
+                $message = "Ruta invalida";
             break;
         }
     }else{
-        $message = "Method not supported";
+        $message = "Metodo no implementado";
     }
 }else{
-    $message = "Invalid request";
+    $message = "Peticion invalida";
 }
 
 echo helper::formatResponse($message,$success);
