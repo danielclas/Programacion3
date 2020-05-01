@@ -1,0 +1,10 @@
+{
+    "name": "dani/dependencies",
+    "authors": [
+        {
+            "name": "danielclas",
+            "email": "danielclas@outlook.es"
+        }
+    ],
+    "require": {}
+}
