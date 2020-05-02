@@ -30,7 +30,7 @@ class authenticator{
             return NULL;
         }
         
-        return $decoded['user'];
+        return $decoded->user;
     }
 }
 

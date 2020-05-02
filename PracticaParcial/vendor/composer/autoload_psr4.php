@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
     'Ajaxray\\PHPWatermark\\' => array($vendorDir . '/ajaxray/php-watermark/src/Ajaxray/PHPWatermark'),
 );

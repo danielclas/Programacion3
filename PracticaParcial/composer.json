@@ -7,6 +7,7 @@
         }
     ],
     "require": {
-        "ajaxray/php-watermark": "^0.1.1"
+        "ajaxray/php-watermark": "^0.1.1",
+        "firebase/php-jwt": "^5.2"
     }
 }

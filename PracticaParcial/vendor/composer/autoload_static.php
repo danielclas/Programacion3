@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit6efbde8aecfc8ac38e888eaa310ef0e9
 {
     public static $prefixLengthsPsr4 = array (
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
+        ),
         'A' => 
         array (
             'Ajaxray\\PHPWatermark\\' => 21,
@@ -14,6 +18,10 @@ class ComposerStaticInit6efbde8aecfc8ac38e888eaa310ef0e9
     );
 
     public static $prefixDirsPsr4 = array (
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
+        ),
         'Ajaxray\\PHPWatermark\\' => 
         array (
             0 => __DIR__ . '/..' . '/ajaxray/php-watermark/src/Ajaxray/PHPWatermark',

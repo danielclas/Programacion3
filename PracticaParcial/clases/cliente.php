@@ -1,37 +1,37 @@
 <?php
 
- class Cliente{
+class cliente{
 
-    $id;
-    $nombre;
-    $dni;
-    $obraSocial;
-    $clave
-    $tipo
+    public $id;
+    public $nombre;
+    public $dni;
+    public $obraSocial;
+    public $clave;
+    public $tipo;
 
-    function __construct($obj){
-        $this->id = $obj['id'];        
+    public function __construct($obj){
+        $this->id = time();    
         $this->nombre = $obj['nombre'];
         $this->dni = $obj['dni'];
-        $this->obraSocial = $obj['obraSocial'];
+        $this->obraSocial = $obj['obra_social'];
         $this->clave = $obj['clave'];
         $this->tipo = $obj['tipo'];
     }
 
     public static function esClienteValido($request){
 
-        $props = ['id','nombre','dni','obraSocial','clave','tipo'];
-
+        $props = ['nombre','dni','obra_social','clave','tipo'];
+        
         foreach($props as $key => $prop)
             if(!isset($request[$prop]))
                 return false;          
         
-        return self::devolverCliente('id',$request['id']) == NULL;
+        return true;
     }
 
     public static function devolverCliente($prop,$dato){
 
-        $data = helper::readFromFile('./archivos/datos.json');
+        $data = helper::leerArchivo('./archivos/datos.json');
   
         foreach($data as $key=>$cliente)
             if(isset($cliente[$prop]) && $cliente[$prop]==$dato)

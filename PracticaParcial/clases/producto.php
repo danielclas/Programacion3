@@ -1,6 +1,3 @@
-<!-- 3. (POST) stock: (Solo para admin). Recibe producto (vacuna o medicamento), marca, precio, stock y foto y
-lo guarda en un archivo en formato JSON, a la imagen la guarda en la carpeta imágenes. Generar un
-identificador (id) único para cada producto -->
 <?php
 
 class Producto{

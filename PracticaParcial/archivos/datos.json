@@ -1,0 +1,10 @@
+[
+    {
+        "id": 1588457841,
+        "nombre": "daniel clas",
+        "dni": "33226655",
+        "obraSocial": "pami",
+        "clave": "clavesecreta",
+        "tipo": "admin"
+    }
+]

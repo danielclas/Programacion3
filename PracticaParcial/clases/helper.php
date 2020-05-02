@@ -1,5 +1,6 @@
 <?php
 
+
  class helper{
 
     static function formatResponse($message,$success){
