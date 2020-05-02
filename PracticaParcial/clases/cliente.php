@@ -9,13 +9,13 @@
     $clave
     $tipo
 
-    function __construct($cliente){
-        $this->id=$client['id'];        
-        $this->nombre=$client['nombre'];
-        $this->dni=$client['dni'];
-        $this->obraSocial=$client['obraSocial'];
-        $this->clave=$client['clave'];
-        $this->tipo=$client['tipo'];
+    function __construct($obj){
+        $this->id = $obj['id'];        
+        $this->nombre = $obj['nombre'];
+        $this->dni = $obj['dni'];
+        $this->obraSocial = $obj['obraSocial'];
+        $this->clave = $obj['clave'];
+        $this->tipo = $obj['tipo'];
     }
 
     public static function esClienteValido($request){
@@ -26,45 +26,18 @@
             if(!isset($request[$prop]))
                 return false;          
         
-        return cliente::devolverCliente('id',$request['id']) == NULL;
+        return self::devolverCliente('id',$request['id']) == NULL;
     }
 
     public static function devolverCliente($prop,$dato){
 
-        $data = cliente::readFromFile();
+        $data = helper::readFromFile('./archivos/datos.json');
   
         foreach($data as $key=>$cliente)
-            if($cliente[$prop]==$dato)
+            if(isset($cliente[$prop]) && $cliente[$prop]==$dato)
                return $cliente;         
         
         return NULL;
-      }
-
-    public static function leerArchivo(){
-
-        $data = '[]';      
-        $filesize = filesize('./archivos/datos.json');
-  
-        if($filesize != 0){
-          $file = fopen('./archivos/datos.json', 'r');
-          $data = fread($file,$filesize);
-          fclose($file);
-        }          
-  
-        return json_decode($data,true);
-      }
-
-    //Debe devolver true o false
-      public static function guardarEnArchivo($cliente){
-          
-        $data = cliente::leerArchivo();
-
-        array_push($data,$cliente);
-  
-        $file = fopen('./archivos/datos.json', 'w');
-
-        fwrite($file,json_encode($data));
-        fclose($file);      
-      }
+      }    
  }
 ?>

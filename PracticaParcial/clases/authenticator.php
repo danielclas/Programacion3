@@ -15,20 +15,22 @@ class authenticator{
             'time'=>time()
         );
 
-        return JWT::encode(authenticator::$payload,authenticator::$key);
+        return JWT::encode(self::$payload,self::$key);
     }
 
-    public static function validarJWT($token){
-
+    public static function validarJWT(){
+        
+        $headers = getallheaders();
+        $token = $headers['token'] ?? NULL;
         $decoded;
 
         try {
-            $decoded = JWT::decode($token, authenticator::$key, array('HS256'));
+            $decoded = JWT::decode($token, self::$key, array('HS256'));
         } catch (Exception $e) {            
             return NULL;
         }
         
-        return $decoded;
+        return $decoded['user'];
     }
 }
 
