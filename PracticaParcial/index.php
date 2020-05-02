@@ -16,19 +16,15 @@ if(isset($request_method) && isset($path_info)){
     if($request_method == 'POST'){
         switch($path_info){
             case '/usuario':
-
                 if(cliente::esClienteValido($_POST)){
                     $cliente = new cliente($_POST);                    
                     $success = helper::guardarEnArchivo('./archivos/datos.json',$cliente);
                 }
-
                 $message = $success ? "Cliente registrado exitosamente" : "Error registrando el cliente";
-
             break;
             case '/login':
                 $nombre = $_POST['nombre'] ?? NULL;
                 $clave = $_POST['clave'] ?? NULL;
-
                 if(isset($nombre) && isset($clave)){
                     $cliente = cliente::devolverCliente('nombre',$nombre);
                     if(isset($cliente)){
@@ -43,12 +39,10 @@ if(isset($request_method) && isset($path_info)){
             break;
             case '/stock':
                 $usuario = authenticator::validarJWT();
-
                 if(isset($usuario) && $usuario->tipo=='admin' && producto::esProductoValido($_POST)){
                     $producto = new producto($_POST);
                     $success = helper::guardarEnArchivo('./archivos/productos.json', $producto);
                 }
-
                 $message = $success ? "Producto registrado exitosamente" : "Error registrando el producto";
             break;
             case '/ventas':
