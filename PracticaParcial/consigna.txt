@@ -1,0 +1,13 @@
+1. (POST) usuario. Registrar a un cliente con ID, nombre, dni, obra social, clave y tipo (admin, user).
+2. (POST) login: Recibe nombre y clave y si son correctos devuelve un JWT, de lo contrario informar lo
+sucedido.
+3. (POST) stock: (Solo para admin). Recibe producto (vacuna o medicamento), marca, precio, stock y foto y
+lo guarda en un archivo en formato JSON, a la imagen la guarda en la carpeta imágenes. Generar un
+identificador (id) único para cada producto
+4. (GET) stock: Muestra la lista de productos.
+5. (POST) Ventas:(Solo usuarios) Recibe id y cantidad de producto y usuario y si existe esa cantidad de
+producto devuelve el monto total de la operación. Si se realiza la venta restar el stock al producto y
+guardar la venta serializado en el archivo ventas.xxx.
+6. (GET) ventas: Si es admin muestra listado con todas las ventas, si es usuario solo las ventas de dicho
+usuario
+7. Generar una marca de agua al subir la foto.
