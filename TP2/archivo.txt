@@ -1,0 +1,1 @@
+O:8:"stdClass":2:{s:6:"nombre";s:6:"daniel";s:8:"apellido";s:4:"clas";}

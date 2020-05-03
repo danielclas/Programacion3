@@ -1,0 +1,18 @@
+[
+    {
+        "producto": "leche",
+        "marca": "sancor",
+        "precio": "10",
+        "stock": "10",
+        "foto": "C:\\xampp\\htdocs\\Programacion3\\PracticaParcial\\clases.\\\\/imagenes\\\\/1588540032.JPG",
+        "id": 1588540032
+    },
+    {
+        "producto": "leche",
+        "marca": "sancor",
+        "precio": "10",
+        "stock": "10",
+        "foto": "C:\\xampp\\htdocs\\Programacion3\\PracticaParcial\\clases.\\/imagenes\\/1588540205.JPG",
+        "id": 1588540205
+    }
+]

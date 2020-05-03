@@ -45,18 +45,13 @@
       }
 
     public static function procesarImagen($id,$imagen){
-
-        $watermark = new watermark($imagen['tmp_name']);
-        $watermark->setFontSize(48)
-        ->setRotate(30)
-        ->setOpacity(.4);
-
+        
         $arr = explode(".", $imagen['name']);
-        $destino = './imagenes/' . $id . end($arr);
+        $destino = './imagenes/' . $id . '.' . end($arr);
 
-        $watermark->withText('Parcial Programacion', $destino);
+        move_uploaded_file($imagen['tmp_name'],$destino);
 
-        return $destino;
+        return __DIR__ . $destino;
     }
 
 }
