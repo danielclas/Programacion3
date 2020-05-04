@@ -5,14 +5,14 @@ use \Firebase\JWT\JWT;
 
 class authenticator{
 
-    private static $key = "miclave";
+    private static $key = "pro3-parcial";
     private static $payload;
 
     public static function generarJWT($cliente){
         
         authenticator::$payload=array(
-            'email'=>$cliente->email,
-            'tipo'=>$cliente->tipo
+            'email'=>$cliente['email'],
+            'tipo'=>$cliente['tipo']
         );
 
         return JWT::encode(self::$payload,self::$key);
@@ -30,7 +30,7 @@ class authenticator{
             return NULL;
         }
         
-        return $decoded->user;
+        return $decoded;
     }
 }
 

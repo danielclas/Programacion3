@@ -43,10 +43,10 @@
         return true;             
       }
 
-    public static function procesarImagen($id,$imagen){
+    public static function procesarImagen($imagen){
         
         $arr = explode(".", $imagen['name']);
-        $destino = './imagenes/' . $id . '.' . end($arr);
+        $destino = './imagenes/' . time() . '.' . end($arr);
 
         move_uploaded_file($imagen['tmp_name'],$destino);
 

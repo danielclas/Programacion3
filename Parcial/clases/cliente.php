@@ -19,7 +19,10 @@ class cliente{
         
         foreach($props as $key => $prop)
             if(!isset($request[$prop]))
-                return false;          
+                return false; 
+                
+        if($request['tipo']!='encargado' && $request['tipo']!='cliente')
+            return false;
         
         return true;
     }

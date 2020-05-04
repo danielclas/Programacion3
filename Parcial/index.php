@@ -4,8 +4,7 @@ require_once __DIR__ ."./vendor/autoload.php";
 require_once './clases/cliente.php';
 require_once './clases/helper.php';
 require_once './clases/authenticator.php';
-require_once './clases/producto.php';
-require_once './clases/venta.php';
+require_once './clases/pizza.php';
 
 $path_info = $_SERVER['PATH_INFO'] ?? NULL;
 $request_method = $_SERVER['REQUEST_METHOD'] ?? NULL;
@@ -15,10 +14,6 @@ $success = false;
 if(isset($request_method) && isset($path_info)){
     if($request_method == 'POST'){
         switch($path_info){
-            /*
-            1. (POST) usuario. Registrar a un cliente con emaill, clave y tipo (encargado, cliente) y guardarlo en el
-            archivo users.xxx.
-            */ 
             case '/usuario':
                 if(cliente::esClienteValido($_POST)){
                     $cliente = new cliente($_POST);       
@@ -29,7 +24,7 @@ if(isset($request_method) && isset($path_info)){
             case '/login':
                 $email = $_POST['email'] ?? NULL;
                 $clave = $_POST['clave'] ?? NULL;
-                if(isset($nombre) && isset($clave)){
+                if(isset($email) && isset($clave)){
                     //Devuelve el cliente si existe, o NULL en su defecto
                     $cliente = cliente::devolverCliente('email',$email);
                     if(isset($cliente)){
@@ -44,9 +39,9 @@ if(isset($request_method) && isset($path_info)){
             break;
             case '/pizzas':
                 $usuario = authenticator::validarJWT();
-                if(isset($usuario) && $usuario->tipo=='admin' && producto::esProductoValido($_POST)){
-                    $producto = new producto($_POST);
-                    $success = helper::guardarEnArchivo('./archivos/productos.json', $producto);
+                if(isset($usuario) && $usuario->tipo=='encargado' && pizza::esPizzaValida($_POST)){
+                    $pizza = new pizza($_POST);
+                    $success = helper::guardarEnArchivo('./archivos/pizzas.json', $pizza);
                 }
                 $message = $success ? "Producto registrado exitosamente" : "Error registrando el producto";
             break;
