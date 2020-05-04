@@ -5,11 +5,13 @@ require_once './clases/cliente.php';
 require_once './clases/helper.php';
 require_once './clases/authenticator.php';
 require_once './clases/pizza.php';
+require_once './clases/venta.php';
 
 $path_info = $_SERVER['PATH_INFO'] ?? NULL;
 $request_method = $_SERVER['REQUEST_METHOD'] ?? NULL;
 $message = '';
 $success = false;
+
 
 if(isset($request_method) && isset($path_info)){
     if($request_method == 'POST'){
@@ -46,12 +48,26 @@ if(isset($request_method) && isset($path_info)){
                 $message = $success ? "Producto registrado exitosamente" : "Error registrando el producto";
             break;
             case '/ventas':
-                $usuario = authenticator::validarJWT();
-                if(isset($usuario)){
-                    $message = venta::obtenerVentas($usuario);
-                    $success = true;
+                $tipo = $_POST['tipo'] ?? NULL;
+                $sabor = $_POST['sabor'] ?? NULL;
+
+                if(isset($tipo) && isset($sabor)){
+                    $usuario = authenticator::validarJWT();
+                    if(isset($usuario) && $usuario->tipo=='cliente'){
+                        if(pizza::hayStock($tipo,$sabor)){
+                            $precio = pizza::actualizarStock($tipo,$sabor);
+                            $venta = new venta($usuario->email,$tipo,$sabor,$precio);
+                            $venta->registrarVenta();
+                            $message = "Venta registrada exitosamente";
+                            $success = true;
+                        }else{
+                            $message = "No hay stock suficiente para la venta";
+                        }
+                    }else{
+                        $message = "Cliente no existe o no es tipo usuario";
+                    }
                 }else{
-                    $message = "Usuario invalido";
+                    $message = "Datos invalidos";
                 }
             break;
             default:
@@ -71,12 +87,18 @@ if(isset($request_method) && isset($path_info)){
             case '/ventas':
                 $usuario = authenticator::validarJWT();
                 if(isset($usuario)){
-                    $message = venta::obtenerVentas($usuario);
+                    $esEncargado = $usuario->tipo=='encargado';
+                    $message = venta::obtenerVentas($esEncargado);
                     $success = true;
                 }else{
                     $message = "Usuario invalido";
                 }
             break;
+            /**
+             * 6. (GET) ventas: Si es encargado muestra el monto total y la cantidad de las ventas, si es cliente solo las
+             * compras de dicho usuario.
+             * 
+             */
             default:
                 $message = "Ruta invalida";
         }

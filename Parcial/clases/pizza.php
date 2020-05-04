@@ -62,6 +62,41 @@ class pizza{
 
         return $arr;
 
+    }    
+
+    public static function hayStock($tipo,$sabor){
+
+        $pizzas = helper::leerArchivo(self::$path);
+
+        foreach($pizzas as $key=>$pizza)
+            if($pizza['tipo']==$tipo && $pizza['sabor']==$sabor && $pizza['stock']>=1)            
+                return true;
+
+        return false;
+    }
+
+    public static function actualizarStock($tipo,$sabor){
+
+        $pizzas = helper::leerArchivo(self::$path);
+        $pizzasActualizado = [];
+        $precio = 0;
+
+        foreach($pizzas as $key=>$pizza){
+            if($pizza['tipo']==$tipo && $pizza['sabor']==$sabor){
+                $pizza['stock']--;
+                $precio = $pizza['precio'];
+            }
+            array_push($pizzasActualizado,$pizza);
+        }
+
+        file_put_contents(self::$path,'');
+        
+        $file = fopen(self::$path,'w');
+        fwrite($file,json_encode($pizzasActualizado));
+        fclose($file);
+
+        return $precio;
+
     }
  }
 ?>

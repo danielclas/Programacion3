@@ -12,12 +12,13 @@ sucedido.
 muzza) y foto y lo guarda en el archivo pizzas.xxx, a la imagen la guarda en la carpeta imágenes. Validar
 los tipos y sabores. La combinación tipo - sabor debe ser única.
 
-4. (GET) pizzas: (Encargado y cliente) Muestra la lista de pizzas, si es encargado muestra el stock, si es user
-no muestra stock.
-
 5. (POST) Ventas:(Solo clientes) Recibe tipo y sabor y si existe esa combinación y hay stock devuelve el
 monto total de la operación. Si se realiza la venta restar el stock a la pizza y guardar la venta archivo
 ventas.xxx el email, tipo, sabor, monto y fecha.
+
+4. (GET) pizzas: (Encargado y cliente) Muestra la lista de pizzas, si es encargado muestra el stock, si es user
+no muestra stock.
+
 
 6. (GET) ventas: Si es encargado muestra el monto total y la cantidad de las ventas, si es cliente solo las
 compras de dicho usuario.
