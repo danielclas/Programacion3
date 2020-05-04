@@ -8,6 +8,7 @@ class Producto{
     public $stock;
     public $foto;
     public $id;
+    public static $path = './archivos/productos.json';
 
     public function __construct($obj){        
 
@@ -31,20 +32,35 @@ class Producto{
         return isset($_FILES['foto']);
     }
 
-    public static function restarStock($id,$cantidad){
+    public static function hayStock($id,$cantidad){
 
-        $productos = helper::leerArchivo('./archivos/productos.json');
+        $productos = helper::leerArchivo(self::$path);
 
-        foreach($productos as $key=>$producto){
-            if($producto['id']==$id && $producto['stock']>=$cantidad){
-                $producto['stock']-=$cantidad;
-                helper::guardarEnArchivo('./archivos/productos.json',$productos);
+        foreach($productos as $key=>$producto)
+            if($producto['id']==$id && $producto['stock']>=$cantidad && $cantidad>0)            
                 return true;
 
-            }         
+        return false;
+    }
+
+    public static function actualizarStock($idProducto,$cantidad){
+
+        $productos = helper::leerArchivo(self::$path);
+        $productosActualizado = [];
+
+        foreach($productos as $key=>$producto){
+            if($idProducto == $producto['id']){
+                $producto['stock']-=$cantidad;
+            }
+            array_push($productosActualizado,$producto);
         }
 
-        return false;
+        file_put_contents(self::$path,'');
+        
+        $file = fopen(self::$path,'w');
+        fwrite($file,json_encode($productosActualizado));
+        fclose($file);
+
     }
 }
 ?>

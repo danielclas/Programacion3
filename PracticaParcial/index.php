@@ -51,10 +51,11 @@ if(isset($request_method) && isset($path_info)){
                 $cliente = $_POST['usuario'] ?? NULL;
 
                 if(isset($idProducto) && isset($cantidadProducto) && isset($cliente)){
-                    $cliente = cliente::devolverCliente('id',$cliente);
-                    if(isset($cliente) && $cliente->tipo=='user'){
-                        if(producto::restarStock($idProducto,$cantidadProducto)){
-                            $venta = new venta($idProducto,$cantidadProducto,$cliente->id);
+                    $cliente = cliente::devolverCliente('nombre',$cliente);
+                    if(isset($cliente) && $cliente['tipo']=='user'){
+                        if(producto::hayStock($idProducto,$cantidadProducto)){
+                            producto::actualizarStock($idProducto,$cantidadProducto);
+                            $venta = new venta($idProducto,$cantidadProducto,$cliente['id']);
                             $venta->registrarVenta();
                             $message = "Venta registrada exitosamente";
                             $success = true;

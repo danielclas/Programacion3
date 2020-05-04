@@ -12,47 +12,37 @@ class venta{
         $this->idCliente = $cliente;
     }
 
-    public function registrarVenta(){        
-        $path = './archivos/ventas.xxx';
-        $filesize = filesize($path);        
-        $ventas = [];
+    public function registrarVenta(){
 
-        if($filesize!=0){
-            $ventas = self::obtenerVentas();
-        }
-
+        $ventas = self::obtenerVentas();
+        
         array_push($ventas,$this);
-        $file = fopen($path, 'wb');
-        fwrite($file,$ventas);
-        fclose($file);
+
+        $ventas = serialize($ventas);
+        file_put_contents(__DIR__.'/.././archivos/ventas.txt',$ventas);
     }
 
     public static function obtenerVentas($usuario = NULL){
 
-        $path = './archivos/ventas.xxx';
-        $filesize = filesize($path);
-        
-        if($filesize==0){
-            return [];
-        }else{
-            $file = fopen($path, 'rb');
-            $data = fread($file,$filesize);
-            $ventas = unserialize($data);
-            fclose($file);
+        $ventas = [];
+        $path = __DIR__.'/.././archivos/ventas.txt';
 
+        if(filesize($path)!=0){
+            $temp = file_get_contents($path);
+            $temp = unserialize($temp);
+            
             if(!isset($usuario) || $usuario->tipo=='admin'){
-                return $ventas;
-            }else{
-                $arr = [];
-                foreach($ventas as $key=>$venta){
+                return $temp;
+            } 
+            else{
+                foreach($temp as $key=>$venta){
                     if($venta->idCliente == $usuario->id){
-                        array_push($arr,$venta);
+                        array_push($ventas,$venta);
                     }
                 }
-                return $arr;
-            }
+            }            
         }
 
-        return [];        
+        return $ventas;
     }
 }

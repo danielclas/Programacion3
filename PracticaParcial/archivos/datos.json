@@ -1,10 +1,1 @@
-[
-    {
-        "id": 1588538211,
-        "nombre": "daniel clas",
-        "dni": "33226655",
-        "obraSocial": "pami",
-        "clave": "clavesecreta",
-        "tipo": "admin"
-    }
-]
+[{"id":1588621308,"nombre":"user","dni":"33226655","obraSocial":"pami","clave":"clavesecreta","tipo":"user"},{"id":1588621378,"nombre":"admin","dni":"33226655","obraSocial":"pami","clave":"clavesecreta","tipo":"admin"}]

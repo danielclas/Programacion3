@@ -27,7 +27,6 @@
         return json_decode($data,true);
     }      
     
-    //Debe devolver true o false
     public static function guardarEnArchivo($path,$obj){
           
         $data = self::leerArchivo($path);
