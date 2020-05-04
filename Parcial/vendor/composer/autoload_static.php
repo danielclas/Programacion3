@@ -20,11 +20,22 @@ class ComposerStaticInitfcfdf104288d50a21bc558493f178e33
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'I' => 
+        array (
+            'Imagick' => 
+            array (
+                0 => __DIR__ . '/..' . '/calcinai/php-imagick/src',
+            ),
+        ),
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitfcfdf104288d50a21bc558493f178e33::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitfcfdf104288d50a21bc558493f178e33::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitfcfdf104288d50a21bc558493f178e33::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }

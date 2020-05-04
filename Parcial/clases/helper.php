@@ -50,6 +50,21 @@
 
         move_uploaded_file($imagen['tmp_name'],$destino);
 
+        try{
+            // Open the original image
+            $image = new Imagick();
+            $image->readImage($destino);
+
+            // Open the watermark
+            $watermark = new Imagick();
+            $watermark->readImage('./imagenes/watermark.png');
+
+            // Overlay the watermark on the original image
+            $image->compositeImage($watermark, imagick::COMPOSITE_OVER, 0, 0);
+        }catch(Exception $e){
+
+        }        
+
         return __DIR__ . $destino;
     }
 
