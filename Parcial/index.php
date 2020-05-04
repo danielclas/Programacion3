@@ -45,15 +45,6 @@ if(isset($request_method) && isset($path_info)){
                 }
                 $message = $success ? "Producto registrado exitosamente" : "Error registrando el producto";
             break;
-            default:
-                $message = "Ruta invalida";
-        }
-    }else if($request_method == 'GET'){
-        switch($path_info){
-            case '/pizzas':
-                $message = helper::leerArchivo('./archivos/productos.json');
-                $success = true;
-            break;
             case '/ventas':
                 $usuario = authenticator::validarJWT();
                 if(isset($usuario)){
@@ -62,6 +53,20 @@ if(isset($request_method) && isset($path_info)){
                 }else{
                     $message = "Usuario invalido";
                 }
+            break;
+            default:
+                $message = "Ruta invalida";
+        }
+    }else if($request_method == 'GET'){
+        switch($path_info){
+            case '/pizzas':
+                $usuario = authenticator::validarJWT();
+                if(isset($usuario)){
+                    $esEncargado = $usuario->tipo=='encargado';
+                    $message = pizza::mostrarPizzas($esEncargado);
+                    $success = true;
+                }
+                $message = $success ? $message : 'Error obteniendo el listado';
             break;
             case '/ventas':
                 $usuario = authenticator::validarJWT();

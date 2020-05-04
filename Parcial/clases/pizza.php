@@ -7,6 +7,7 @@ class pizza{
     public $stock;
     public $sabor;
     public $foto;
+    public static $path = './archivos/pizzas.json';
 
     public function __construct($obj){
         
@@ -21,7 +22,7 @@ class pizza{
     public static function esPizzaValida($request){
 
         $props = ['tipo','precio','stock','sabor'];
-        $pizzas = helper::leerArchivo('./archivos/pizzas.json');
+        $pizzas = helper::leerArchivo(self::$path);
 
         foreach($props as $key => $prop)
             if(!isset($request[$prop]))
@@ -40,15 +41,27 @@ class pizza{
         return isset($_FILES['foto']);
     }
 
-    public static function devolverCliente($prop,$dato){
+    public static function mostrarPizzas($esEncargado){
 
-        $data = helper::leerArchivo('./archivos/datos.json');
-  
-        foreach($data as $key=>$cliente)
-            if(isset($cliente[$prop]) && $cliente[$prop]==$dato)
-               return $cliente;         
-        
-        return NULL;
-      }    
+        $pizzas = helper::leerArchivo(self::$path);
+        $arr = [];
+
+        if(empty($pizzas)){
+            return '[]';
+        }else{
+            if($esEncargado){
+                return $pizzas;
+            }else{
+                foreach($pizzas as $key=>$pizza){
+                    //pop key
+                    unset($pizza['stock']);
+                    array_push($arr,$pizza);
+                }
+            }
+        }
+
+        return $arr;
+
+    }
  }
 ?>
