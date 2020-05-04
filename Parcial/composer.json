@@ -6,5 +6,7 @@
             "email": "danielclas@outlook.es"
         }
     ],
-    "require": {}
+    "require": {
+        "firebase/php-jwt": "^5.2"
+    }
 }
