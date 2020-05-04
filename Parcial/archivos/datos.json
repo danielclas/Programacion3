@@ -1,12 +1,1 @@
-[
-    {
-        "email": "daniel@daniel.com",
-        "clave": "123123",
-        "tipo": "cliente"
-    },
-    {
-        "email": "jorge@encargado.com",
-        "clave": "123123",
-        "tipo": "encargado"
-    }
-]
+[{"email":"jorge@encargado.com","clave":"123123","tipo":"encargado"}]
