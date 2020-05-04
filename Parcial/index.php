@@ -88,17 +88,12 @@ if(isset($request_method) && isset($path_info)){
                 $usuario = authenticator::validarJWT();
                 if(isset($usuario)){
                     $esEncargado = $usuario->tipo=='encargado';
-                    $message = venta::obtenerVentas($esEncargado);
+                    $message = venta::obtenerVentas($esEncargado, $usuario->email);
                     $success = true;
                 }else{
                     $message = "Usuario invalido";
                 }
             break;
-            /**
-             * 6. (GET) ventas: Si es encargado muestra el monto total y la cantidad de las ventas, si es cliente solo las
-             * compras de dicho usuario.
-             * 
-             */
             default:
                 $message = "Ruta invalida";
         }

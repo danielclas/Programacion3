@@ -25,20 +25,24 @@ class venta{
     // Si se realiza la venta restar el stock a la pizza y guardar la venta archivo
     //         // ventas.xxx el email, tipo, sabor, monto y fecha.
 
-    public static function obtenerVentas($usuario = NULL){
+    public static function obtenerVentas($esEncargado,$email){
 
         $ventas = helper::leerArchivo(self::$path);
         $montoTotal = 0;
         $cantidadDeVentas = 0;
+        $compras = [];
 
         if(!empty($ventas)){
-            
+            foreach($ventas as $key=>$venta){
+                if($esEncargado){
+                    $montoTotal+=$venta['monto'];
+                }else if($email==$venta['email']){
+                    array_push($compras,$venta);
+                }
+            }
+            $cantidadDeVentas = count($ventas);
         }
+
+        return $esEncargado ? array('monto'=>$montoTotal,'cantidadDeVentas'=>$cantidadDeVentas) : $compras;
     }
 }
-
-/**
- * (GET) ventas: Si es encargado muestra el monto total y la cantidad de las ventas, si es cliente solo las
-             * compras de dicho usuario.
- * 
- */
