@@ -1,0 +1,21 @@
+{
+    "name": "dani/practica-parcial2",
+    "authors": [
+        {
+            "name": "danielclas",
+            "email": "danielclas@outlook.es"
+        }
+    ],
+    "require": {
+        "slim/slim":"4.*",
+        "slim/psr7":"^1.1",
+        "illuminate/database":"^7.15",
+        "illuminate/events":"^7.17"
+    },
+    "autoload":{
+        "psr-4":{
+            "App\\":"src",
+            "Config\\":"config"
+        }
+    }
+}
