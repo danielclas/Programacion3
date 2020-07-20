@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitcc332ecb01ccf817846d306d8ebd5a17
+class ComposerStaticInitbf1d5908a7287ad39af160693a6be574
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -58,6 +58,7 @@ class ComposerStaticInitcc332ecb01ccf817846d306d8ebd5a17
         ),
         'F' => 
         array (
+            'Firebase\\JWT\\' => 13,
             'Fig\\Http\\Message\\' => 17,
             'FastRoute\\' => 10,
         ),
@@ -175,6 +176,10 @@ class ComposerStaticInitcc332ecb01ccf817846d306d8ebd5a17
         array (
             0 => __DIR__ . '/..' . '/illuminate/container',
         ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
+        ),
         'Fig\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/fig/http-message-util/src',
@@ -211,9 +216,9 @@ class ComposerStaticInitcc332ecb01ccf817846d306d8ebd5a17
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitcc332ecb01ccf817846d306d8ebd5a17::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitcc332ecb01ccf817846d306d8ebd5a17::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitcc332ecb01ccf817846d306d8ebd5a17::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitbf1d5908a7287ad39af160693a6be574::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitbf1d5908a7287ad39af160693a6be574::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitbf1d5908a7287ad39af160693a6be574::$classMap;
 
         }, null, ClassLoader::class);
     }

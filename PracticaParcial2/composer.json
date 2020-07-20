@@ -1,19 +1,20 @@
 {
-    "name": "dani/practica-parcial2",
+    "name": "a309612/practica-parcial2",
     "authors": [
         {
-            "name": "danielclas",
-            "email": "danielclas@outlook.es"
+            "name": "Daniel clas",
+            "email": "dclas@santandertecnologia.com.ar"
         }
     ],
     "require": {
-        "slim/slim":"4.*",
+        "firebase/php-jwt": "^5.2",
+        "slim/slim": "4.*",
         "slim/psr7":"^1.1",
         "illuminate/database":"^7.15",
-        "illuminate/events":"^7.17"
+        "illuminate/events":"^7.16"
     },
-    "autoload":{
-        "psr-4":{
+    "autoload": {
+        "psr-4": {
             "App\\":"src",
             "Config\\":"config"
         }

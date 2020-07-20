@@ -1,22 +1,24 @@
 <?php
-
+// Aca incluyo mis controladores
 use Slim\Routing\RouteCollectorProxy;
-use App\Controllers\UsuarioController;
-use App\Controllers\TurnoController;
-use App\Controllers\MascotaController;
+use App\Controllers\UsuariosController;
+use App\Controllers\MascotasController;
+use App\Controllers\TurnosController;
+use App\Middleware\TokenValidatorMiddleware;
+use App\Middleware\AllCapsMiddleware;
 
-return function ($app){
-    
-    $app->post('/registro', UsuarioController::class . ':signUp');
-    $app->post('/login', UsuarioController::class . ':logIn');
+return function($app){
 
-    $app->group('/turnos', function(RouteCollectorProxy $group){
-        $group->post('/mascota', TurnoController::class . ':setAppointment');
-        $group->get('/{id_usuario}', TurnoController::class . ':getAppointments');
-    });    
+    $app->post('/registro', UsuariosController::class.':registro');
+    $app->post('/login', UsuariosController::class.':login');
 
     $app->group('/mascota', function(RouteCollectorProxy $group){
-        $group->post('/', MascotaController::class . ':registerMascota');
-        $group->get('/{id_mascota}', MascotaController::class . ':getMascotaHistory');
-    }); 
+        $group->get('/{id_mascota}', MascotasController::class.':verHistorialMascota');
+        $group->post('[/]', MascotasController::class.':registrarMascota');
+    })->add(new TokenValidatorMiddleware());
+
+    $app->group('/turnos', function(RouteCollectorProxy $group){
+        $group->post('/mascota', TurnosController::class.':registrarTurno');
+        $group->get('/{id_usuario}', TurnosController::class.':mostrarTurnos')->add(new AllCapsMiddleware);
+    })->add(new TokenValidatorMiddleware());
 };

@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Models;
 
-class Mascota {
-
-    public static function Saludar(){
-        echo "Hola";
-    }
+class Mascota extends \Illuminate\Database\Eloquent\Model
+{
+    public $timestamps = false;
+    protected $table = 'mascotas';
 }

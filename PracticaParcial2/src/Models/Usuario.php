@@ -1,9 +1,8 @@
 <?php
-
 namespace App\Models;
 
-class Usuario extends \Illuminate\Database\Eloquent\Model {
-
+class Usuario extends \Illuminate\Database\Eloquent\Model
+{
     public $timestamps = false;
-    public $table = 'usuario';
+    protected $table = 'usuarios';
 }
