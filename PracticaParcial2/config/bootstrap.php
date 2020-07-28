@@ -8,7 +8,6 @@ use Slim\Factory\AppFactory;
 $app = AppFactory::create();
 $app->setBasePath('/programacion3/practicaparcial2/public');
 
-
 use Psr\Http\Message\ServerRequestInterface;
 $app->addRoutingMiddleware();
 

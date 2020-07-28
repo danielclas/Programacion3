@@ -1,10 +1,10 @@
 <?php
 // Aca incluyo mis middlewares
 use Slim\App;
-use App\Middleware\JsonConvertResponseMiddleware;
+use App\Middlewares\JsonContentType;
 
 return function(App $app){
 
     $app->addBodyParsingMiddleware();
-    $app->add(new JsonConvertResponseMiddleware());
+    $app->add(new JsonContentType());
 };

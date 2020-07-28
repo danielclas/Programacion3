@@ -3,17 +3,12 @@ namespace App\Utils;
 
 class ResponseParser{
 
-    public static function JsendResponse($status, $data){
+    public static function parse($success, $data){
 
-        self::$respuesta = new \stdClass();
-        self::$respuesta->status = $status;
+        $response = new \StdClass();
+        $response->status = $success ?? '';
+        $response->data = $data ?? '';
 
-        if ($status != "success") {
-            self::$respuesta->message = $data;
-        } else {
-            self::$respuesta->data = $data;
-        }
-
-        return json_encode(self::$respuesta);
+        return json_encode($response);
     }
 }

@@ -14,9 +14,12 @@
         "illuminate/events":"^7.16"
     },
     "autoload": {
-        "psr-4": {
-            "App\\":"src",
-            "Config\\":"config"
-        }
+        "classmap":[
+            "src/controllers",
+            "src/middlewares",
+            "src/models",
+            "src/utils",
+            "config"
+        ]
     }
 }

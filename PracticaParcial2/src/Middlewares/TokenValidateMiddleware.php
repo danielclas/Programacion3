@@ -5,42 +5,31 @@ namespace App\Middleware;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Server\RequestHandlerInterface as RequestHandler;
 use Slim\Psr7\Response;
-use App\Utils\RtaJsend;
+use App\Utils\Authenticator;
+use App\Utils\ResponseParser;
 use \Firebase\JWT\JWT;
 
-class TokenValidatorMiddleware
+class TokenValidateMiddleware
 {    
-    public function __invoke(Request $request, RequestHandler $handler): Response
-    {
+    public function __invoke(Request $request, RequestHandler $handler): Response{   
+
         $response = $handler->handle($request);
         $existingContent = (string) $response->getBody();
+        $err = ResponseParser::parse(false, 'No tiene permisos para realizar la operación');
+
         $response = new Response();
-        try{
-            $tokenExiste = false;
-            $headers = $request->getHeaders();
-            foreach ($headers as $key => $value) {
-                if($key == 'token'){
-                    $tokenExiste = true;
-                    break;
-                }
-            }
-            if($tokenExiste){
-                $token_recibido = $request->getHeaders()['token'][0];
-                if($token_recibido != ''){
-                    $usuario_decodificado = JWT::decode($token_recibido, "clavesecreta", array('HS256'));
-                    $response->getBody()->write($existingContent);
-                } else {
-                    $response->getBody()->write(RtaJsend::JsendResponse('error','No se recibió ningun token'));
-                }
-            } else {
-                $response->getBody()->write(RtaJsend::JsendResponse('error','No existe ningun header que se llame token'));
-            }
-        } catch (\Throwable $th) {
-            $response = new Response();
-            $response->getBody()->write(RtaJsend::JsendResponse('error','Token JWT erroneo '));
-            return $response;
+
+        try {
+            $token = $request->getheaders()['token'][0] ?? null;
+            $user = null;
+
+            if(isset($token)) $user = Authenticator::decryptToken($token);
+
+            $response->getBody()->write(isset($user) ? $existingContent : $err);
+        } catch (Exception $e) {
+            $response->getBody()->write($err);
         }
-    
-        return $response;
+
+        return $response;        
     }
 }

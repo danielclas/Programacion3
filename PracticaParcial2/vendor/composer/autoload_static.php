@@ -68,12 +68,7 @@ class ComposerStaticInitbf1d5908a7287ad39af160693a6be574
         ),
         'C' => 
         array (
-            'Config\\' => 7,
             'Carbon\\' => 7,
-        ),
-        'A' => 
-        array (
-            'App\\' => 4,
         ),
     );
 
@@ -192,21 +187,28 @@ class ComposerStaticInitbf1d5908a7287ad39af160693a6be574
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Inflector',
         ),
-        'Config\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/config',
-        ),
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
         ),
-        'App\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
-        ),
     );
 
     public static $classMap = array (
+        'App\\Controllers\\MascotasController' => __DIR__ . '/../..' . '/src/controllers/MascotasController.php',
+        'App\\Controllers\\TurnosController' => __DIR__ . '/../..' . '/src/controllers/TurnosController.php',
+        'App\\Controllers\\UsuariosController' => __DIR__ . '/../..' . '/src/controllers/UsuariosController.php',
+        'App\\Middleware\\AllCapsMiddleware' => __DIR__ . '/../..' . '/src/middlewares/AllCapsMiddleware.php',
+        'App\\Middleware\\TokenValidateMiddleware' => __DIR__ . '/../..' . '/src/middlewares/TokenValidateMiddleware.php',
+        'App\\Middlewares\\JsonContentType' => __DIR__ . '/../..' . '/src/middlewares/JsonConvertMiddleware.php',
+        'App\\Models\\Mascota' => __DIR__ . '/../..' . '/src/models/Mascota.php',
+        'App\\Models\\TipoMascota' => __DIR__ . '/../..' . '/src/models/TipoMascota.php',
+        'App\\Models\\Turno' => __DIR__ . '/../..' . '/src/models/Turnos.php',
+        'App\\Models\\Usuario' => __DIR__ . '/../..' . '/src/models/Usuario.php',
+        'App\\Utils\\Authenticator' => __DIR__ . '/../..' . '/src/utils/Authenticator.php',
+        'App\\Utils\\RequestValidator' => __DIR__ . '/../..' . '/src/utils/RequestValidator.php',
+        'App\\Utils\\ResponseParser' => __DIR__ . '/../..' . '/src/utils/ResponseParser.php',
+        'App\\Utils\\ValidarPost' => __DIR__ . '/../..' . '/src/utils/validarPost.php',
+        'Config\\Database' => __DIR__ . '/../..' . '/config/database.php',
         'JsonException' => __DIR__ . '/..' . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',

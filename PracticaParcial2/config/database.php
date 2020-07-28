@@ -1,5 +1,5 @@
 <?php
-namespace Config;//No olvidar poner el namespace
+namespace Config;
 
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Events\Dispatcher;
