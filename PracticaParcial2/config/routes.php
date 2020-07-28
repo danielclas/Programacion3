@@ -14,16 +14,10 @@ return function($app){
     $app->post('/tipo_mascota', MascotasController::class.':cargarTipo')->add(new TokenValidateMiddleware());
     $app->post('/mascota', MascotasController::class.':cargarMascota')->add(new TokenValidateMiddleware());
     $app->group('/turnos', function(RouteCollectorProxy $group){
-        // $group->post('/mascota', );
-        $group->get('/{id_usuario}', TurnosController::class.':getTurnosVeterinarios');
+        $group->get('/{id_usuario}', TurnosController::class.':getTurnos')
+        ->add(new AllCapsMiddleware());
+        $group->post('[/mascota]', TurnosController::class.':cargarTurno');
+        $group->get('/mascota/{id_mascota}', TurnosController::class.'getTurnosMascota')
+        ->add(new AllCapsMiddleware());
     })->add(new TokenValidateMiddleware());
-    // $app->group('/mascota', function(RouteCollectorProxy $group){
-    //     $group->get('/{id_mascota}', MascotasController::class.':verHistorialMascota');
-    //     $group->post('[/]', MascotasController::class.':registrarMascota');
-    // })->add(new TokenValidateMiddleware());
-
-    // $app->group('/turnos', function(RouteCollectorProxy $group){
-    //     $group->post('/mascota', TurnosController::class.':registrarTurno');
-    //     $group->get('/{id_usuario}', TurnosController::class.':mostrarTurnos')->add(new AllCapsMiddleware);
-    // })->add(new TokenValidateMiddleware());
 };

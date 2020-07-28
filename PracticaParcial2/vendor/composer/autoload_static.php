@@ -205,6 +205,7 @@ class ComposerStaticInitbf1d5908a7287ad39af160693a6be574
         'App\\Models\\Turno' => __DIR__ . '/../..' . '/src/models/Turnos.php',
         'App\\Models\\Usuario' => __DIR__ . '/../..' . '/src/models/Usuario.php',
         'App\\Utils\\Authenticator' => __DIR__ . '/../..' . '/src/utils/Authenticator.php',
+        'App\\Utils\\DateParser' => __DIR__ . '/../..' . '/src/utils/DateParser.php',
         'App\\Utils\\RequestValidator' => __DIR__ . '/../..' . '/src/utils/RequestValidator.php',
         'App\\Utils\\ResponseParser' => __DIR__ . '/../..' . '/src/utils/ResponseParser.php',
         'App\\Utils\\ValidarPost' => __DIR__ . '/../..' . '/src/utils/validarPost.php',

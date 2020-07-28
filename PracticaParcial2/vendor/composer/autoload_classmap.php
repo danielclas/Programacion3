@@ -17,6 +17,7 @@ return array(
     'App\\Models\\Turno' => $baseDir . '/src/models/Turnos.php',
     'App\\Models\\Usuario' => $baseDir . '/src/models/Usuario.php',
     'App\\Utils\\Authenticator' => $baseDir . '/src/utils/Authenticator.php',
+    'App\\Utils\\DateParser' => $baseDir . '/src/utils/DateParser.php',
     'App\\Utils\\RequestValidator' => $baseDir . '/src/utils/RequestValidator.php',
     'App\\Utils\\ResponseParser' => $baseDir . '/src/utils/ResponseParser.php',
     'App\\Utils\\ValidarPost' => $baseDir . '/src/utils/validarPost.php',
