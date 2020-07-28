@@ -5,7 +5,6 @@ namespace App\Controllers;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Models\Usuario;
-use App\Utils\ValidarPost;
 use App\Utils\ResponseParser;
 use App\Utils\RequestValidator;
 use App\Utils\Authenticator;

@@ -70,8 +70,21 @@ class EventosController {
                         $success = isset($queryResult);
                         $data = $success ? $queryResult : 'No pudo obtenerse el dato deseado';
                     }else if($user->tipo == '2'){
-                        $success = true;
-                        $data = "Tipo admin";
+                        $queryResult = Evento::select('fecha', 'descripcion', 'usuarios.email')
+                        ->join('usuarios', 'eventos.id_usuario', '=', 'usuarios.id')
+                        ->orderBy('fecha', 'desc')
+                        ->orderBy('usuarios.email', 'asc')
+                        ->get();
+
+                        /**$queryResult = Turno::select('fecha', 'mascotas.nombre', 'mascotas.fecha_nacimiento', 'usuarios.usuario as dueño')
+                    ->whereDate('fecha', $today->format('Y-m-d'))
+                    ->where('veterinario_id', $params['id_usuario'])
+                    ->join('mascotas', 'turnos.mascota_id', '=', 'mascotas.id')
+                    ->join('usuarios', 'mascotas.cliente_id', '=', 'usuarios.id')
+                    ->get(); */
+
+                        $success = isset($queryResult);
+                        $data = $success ? $queryResult : 'No pudo obtenerse el dato deseado';                       
                     }else{
                         $data = 'Error en el tipo de usuario';
                     }
