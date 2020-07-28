@@ -14,9 +14,25 @@ class AllCapsMiddleware
         $response = $handler->handle($request);
         $existingContent = $response->getBody();
         $data = json_decode($existingContent)->data;
+        $res = $existingContent;
+        $success = false;
 
-        echo var_dump($data);
-        $response->getBody()->write("");
+        if(isset($data)){
+            foreach($data as $obj){
+                $today = new DateTime(); 
+                if($obj->fecha->getTimestamp() > $today->getTimestamp()){
+                    foreach($obj as $key => $value){
+                        if(ctype_alnum($obj[$key])){
+                            $obj[$key] = \strtoupper($obj[$key]);
+                        }
+                    }
+                }
+            }
+            $res = $data;
+            $success = true;
+        }        
+        
+        $response->getBody()->write(ResponseParser::parse($success, $res));
     
         return $response;
     }

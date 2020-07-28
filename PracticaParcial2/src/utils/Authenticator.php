@@ -19,6 +19,7 @@ class Authenticator{
             'email' => $user->email,
             'tipo' => $user->tipo,
             'password' => $user->clave,
+            'id' => $user->id
         );
         
         return ["token" => JWT::encode($payload, self::$key)];      

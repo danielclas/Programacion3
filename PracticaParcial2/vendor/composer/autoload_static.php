@@ -194,12 +194,14 @@ class ComposerStaticInitbf1d5908a7287ad39af160693a6be574
     );
 
     public static $classMap = array (
+        'App\\Controllers\\EventosController' => __DIR__ . '/../..' . '/src/controllers/EventosController.php',
         'App\\Controllers\\MascotasController' => __DIR__ . '/../..' . '/src/controllers/MascotasController.php',
         'App\\Controllers\\TurnosController' => __DIR__ . '/../..' . '/src/controllers/TurnosController.php',
         'App\\Controllers\\UsuariosController' => __DIR__ . '/../..' . '/src/controllers/UsuariosController.php',
         'App\\Middleware\\AllCapsMiddleware' => __DIR__ . '/../..' . '/src/middlewares/AllCapsMiddleware.php',
         'App\\Middleware\\TokenValidateMiddleware' => __DIR__ . '/../..' . '/src/middlewares/TokenValidateMiddleware.php',
         'App\\Middlewares\\JsonContentType' => __DIR__ . '/../..' . '/src/middlewares/JsonConvertMiddleware.php',
+        'App\\Models\\Evento' => __DIR__ . '/../..' . '/src/models/Evento.php',
         'App\\Models\\Mascota' => __DIR__ . '/../..' . '/src/models/Mascota.php',
         'App\\Models\\TipoMascota' => __DIR__ . '/../..' . '/src/models/TipoMascota.php',
         'App\\Models\\Turno' => __DIR__ . '/../..' . '/src/models/Turnos.php',

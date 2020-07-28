@@ -6,12 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Controllers\\EventosController' => $baseDir . '/src/controllers/EventosController.php',
     'App\\Controllers\\MascotasController' => $baseDir . '/src/controllers/MascotasController.php',
     'App\\Controllers\\TurnosController' => $baseDir . '/src/controllers/TurnosController.php',
     'App\\Controllers\\UsuariosController' => $baseDir . '/src/controllers/UsuariosController.php',
     'App\\Middleware\\AllCapsMiddleware' => $baseDir . '/src/middlewares/AllCapsMiddleware.php',
     'App\\Middleware\\TokenValidateMiddleware' => $baseDir . '/src/middlewares/TokenValidateMiddleware.php',
     'App\\Middlewares\\JsonContentType' => $baseDir . '/src/middlewares/JsonConvertMiddleware.php',
+    'App\\Models\\Evento' => $baseDir . '/src/models/Evento.php',
     'App\\Models\\Mascota' => $baseDir . '/src/models/Mascota.php',
     'App\\Models\\TipoMascota' => $baseDir . '/src/models/TipoMascota.php',
     'App\\Models\\Turno' => $baseDir . '/src/models/Turnos.php',
